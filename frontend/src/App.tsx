@@ -1,10 +1,11 @@
 import "./App.css";
+import AuthPage from "./pages/AuthPage";
 
 function App() {
   return (
     <>
       <div>
-        <p>Sistema de Gestión de Eventos</p>
+        <AuthPage />
       </div>
     </>
   );
