@@ -1,0 +1,79 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #0077cc;
+  color: #fff;
+}
+
+.header nav a {
+  margin: 0 10px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.header .login-button {
+  background-color: #005fa3;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.main-section {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: #f9f9f9;
+}
+
+.cta-button {
+  background-color: #0077cc;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.events-section {
+  padding: 20px;
+}
+
+.events-list {
+  list-style: none;
+  padding: 0;
+}
+
+.event-item {
+  border: 1px solid #ddd;
+  margin: 10px 0;
+  padding: 10px;
+  color: whitesmoke;
+}
+
+h2{
+    color: whitesmoke;
+}
+
+.sub{
+    color: gray;
+}
+
+.footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #0077cc;
+  color: #fff;
+}
+
+.footer nav a {
+  margin: 0 5px;
+  color: #fff;
+  text-decoration: none;
+}
