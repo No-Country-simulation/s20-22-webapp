@@ -1,4 +1,4 @@
-package com.no_country.sysEvent.enums;
+package com.eventix.eventix.enums;
 
 public enum Role {
     ORGANIZER,

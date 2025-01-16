@@ -1,6 +1,6 @@
-package com.no_country.sysEvent.domain;
+package com.eventix.eventix.domain;
 
-import com.no_country.sysEvent.enums.Role;
+import com.eventix.eventix.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
