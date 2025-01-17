@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(false);
@@ -10,7 +10,7 @@ export default function AuthPage() {
   return (
     <div>
       <div>
-        <h1>{isLogin ? "Iniciar Sesión" : "Crear Cuenta"}</h1>
+        <h1>{isLogin ? 'Iniciar Sesión' : 'Crear Cuenta'}</h1>
 
         {isLogin ? (
           <form>
@@ -27,12 +27,12 @@ export default function AuthPage() {
           </form>
         )}
         <p>
-          {isLogin ? "¿No tienes una cuenta? " : "¿Ya tienes una cuenta? "}
+          {isLogin ? '¿No tienes una cuenta? ' : '¿Ya tienes una cuenta? '}
           <span
             onClick={toggleAuthMode}
-            style={{ cursor: "pointer", color: "blue" }}
+            style={{ cursor: 'pointer', color: 'blue' }}
           >
-            {isLogin ? "Regístrate aquí" : "Inicia sesión"}
+            {isLogin ? 'Regístrate aquí' : 'Inicia sesión'}
           </span>
         </p>
       </div>
