@@ -1,5 +1,5 @@
-import "./App.css";
-import AuthPage from "./pages/AuthPage";
+import './App.css';
+import AuthPage from './pages/AuthPage';
 
 function App() {
   return (
