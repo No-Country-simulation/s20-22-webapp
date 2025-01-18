@@ -57,45 +57,44 @@ export const Input = ({
   error,
   icon,
   iconPosition = 'left',
-  inputSize = 'md',
-  variant = 'primary',
-  borderRadius = 'md',
-  shadow = 'sm',
+  inputSize,
+  variant,
+  borderRadius,
+  shadow,
   isLoading,
   loader,
   className,
+  disabled,
   ...props
 }: InputProps) => {
+  const isDisabled = isLoading || disabled;
+
   const inputClass = cn(
     inputVariant({ variant, inputSize, borderRadius, shadow }),
     className,
-    props.disabled && 'opacity-50 cursor-not-allowed',
+    isDisabled && 'opacity-50 cursor-not-allowed',
     error ? 'border-red-500' : 'border-gray-300',
-    iconPosition === 'left' && icon && 'pl-10',
-    iconPosition === 'right' && icon && 'pr-10'
+    icon && iconPosition === 'left' && 'pl-10',
+    icon && iconPosition === 'right' && 'pr-10'
   );
+
+  const iconClass = 'absolute top-1/2 transform -translate-y-1/2 text-gray-400';
 
   return (
     <div className={cn('relative', className)}>
       {icon && iconPosition === 'left' && (
-        <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-          {icon}
-        </div>
+        <div className={cn(iconClass, 'left-3')}>{icon}</div>
       )}
       <input
         {...props}
         className={inputClass}
-        disabled={isLoading || props.disabled}
+        disabled={isDisabled}
       />
       {icon && iconPosition === 'right' && (
-        <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-          {icon}
-        </div>
+        <div className={cn(iconClass, 'right-3')}>{icon}</div>
       )}
       {isLoading && loader && (
-        <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-          {loader}
-        </div>
+        <div className={cn(iconClass, 'right-3')}>{loader}</div>
       )}
       {error && <span className="mt-1 text-xs text-red-500">{error}</span>}
     </div>
