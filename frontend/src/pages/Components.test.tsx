@@ -24,7 +24,6 @@ export const ComponentsTest = () => {
         </svg>
       }
     >
-      {' '}
       CLICK
     </Button>
   );
