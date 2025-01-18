@@ -1,4 +1,5 @@
 import RootLayout from '@/layouts';
+import { ComponentsTest } from '@pages/Components.test';
 import AuthPage from '@pages/AuthPage';
 import ErrorPage from '@pages/ErrorPage';
 import HomePage from '@pages/HomePage'
@@ -18,6 +19,10 @@ export const router = createBrowserRouter([
         path: 'auth',
         element: <AuthPage />,
       },
+      {
+        path:'components',
+        element:<ComponentsTest/>
+      }
     ],
   },
 ]);
