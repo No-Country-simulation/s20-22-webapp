@@ -2,7 +2,7 @@ import RootLayout from '@/layouts';
 import { ComponentsTest } from '@pages/Components.test';
 import AuthPage from '@pages/AuthPage';
 import ErrorPage from '@pages/ErrorPage';
-import HomePage from '@pages/HomePage'
+import HomePage from '@pages/HomePage';
 import { createBrowserRouter } from 'react-router-dom';
 
 export const router = createBrowserRouter([
@@ -20,9 +20,9 @@ export const router = createBrowserRouter([
         element: <AuthPage />,
       },
       {
-        path:'components',
-        element:<ComponentsTest/>
-      }
+        path: 'components',
+        element: <ComponentsTest />,
+      },
     ],
   },
 ]);

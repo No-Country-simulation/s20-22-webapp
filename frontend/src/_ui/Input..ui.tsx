@@ -9,10 +9,13 @@ const inputVariant = cva(
     variants: {
       variant: {
         primary: 'bg-white text-gray-900 border-gray-300 focus:ring-blue-500',
-        secondary: 'bg-gray-100 text-gray-800 border-gray-400 focus:ring-gray-500',
-        outline: 'bg-transparent text-gray-700 border-gray-300 focus:ring-blue-500',
+        secondary:
+          'bg-gray-100 text-gray-800 border-gray-400 focus:ring-gray-500',
+        outline:
+          'bg-transparent text-gray-700 border-gray-300 focus:ring-blue-500',
         danger: 'bg-red-50 text-red-500 border-red-300 focus:ring-red-500',
-        success: 'bg-green-50 text-green-500 border-green-300 focus:ring-green-500',
+        success:
+          'bg-green-50 text-green-500 border-green-300 focus:ring-green-500',
       },
       inputSize: {
         sm: 'px-2.5 py-1.5 text-xs',
@@ -85,11 +88,7 @@ export const Input = ({
       {icon && iconPosition === 'left' && (
         <div className={cn(iconClass, 'left-3')}>{icon}</div>
       )}
-      <input
-        {...props}
-        className={inputClass}
-        disabled={isDisabled}
-      />
+      <input {...props} className={inputClass} disabled={isDisabled} />
       {icon && iconPosition === 'right' && (
         <div className={cn(iconClass, 'right-3')}>{icon}</div>
       )}
