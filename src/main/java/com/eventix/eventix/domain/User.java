@@ -26,6 +26,7 @@ public class User {
     @Column(name = "password", length = 100, nullable = false)
     private String password;
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Role role;
     @Column(name = "created_at", nullable = true)
     @CreationTimestamp(source = SourceType.DB)
