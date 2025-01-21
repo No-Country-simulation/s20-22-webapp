@@ -1,3 +1,7 @@
+import MyModal from '@/components/Modal';
+import useModal from '@/hooks/useModal';
+import AddIcon from '@mui/icons-material/Add';
+import { IconButton } from '@mui/material';
 export default function HomePage() {
   // Esta página cambiará eventualmente, de momento queda así para tener una base sobre la cual construir.
 
@@ -11,7 +15,7 @@ export default function HomePage() {
     { id: 4, name: 'Seminario de Marketing', date: '2025-01-25' },
     { id: 5, name: 'Charla de Liderazgo', date: '2025-01-30' },
   ];
-
+  const { open, openModal, closeModal } = useModal();
   return (
     <div className="min-h-screen bg-gray-50 text-gray-800">
       {/* Main Content */}
@@ -42,13 +46,37 @@ export default function HomePage() {
               <h3 className="text-lg font-medium mb-6 text-center">
                 Crear nuevo evento
               </h3>
-              <button
+              {/* <button
                 className="w-16 h-16 rounded-full bg-gray-100 hover:bg-gray-200 
                            flex items-center justify-center text-3xl text-gray-700 
                            shadow-md transition-all duration-200"
               >
                 +
-              </button>
+              </button> */}
+              <IconButton
+                onClick={openModal}
+                color="primary"
+                sx={{
+                  width: 56,
+                  height: 56,
+                  borderRadius: '50%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  backgroundColor: 'primary.main',
+                  '&:hover': {
+                    backgroundColor: 'primary.dark',
+                  },
+                }}
+              >
+                <AddIcon sx={{ color: 'white' }} />
+              </IconButton>
+              <MyModal
+                closeModal={closeModal}
+                open={open}
+                title="titulo del modal"
+                content="contenido del modal"
+              />
             </div>
 
             {/* Card 3 */}
