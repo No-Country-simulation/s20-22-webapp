@@ -6,6 +6,7 @@ import com.eventix.eventix.model.dto.UserDTO;
 import com.eventix.eventix.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,14 +20,18 @@ public class UserServiceImpl implements IUserService{
 
     private final ModelMapper modelMapper;
 
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper) {
+    private final PasswordEncoder passwordEncoder;
+
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public UserDTO createUser(UserDTO userDTO) {
         User user = convertToEntity(userDTO);
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         User savedUser = userRepository.save(user);
         return convertToDto(savedUser);
     }
@@ -68,6 +73,10 @@ public class UserServiceImpl implements IUserService{
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con ID: " + userId));
 
         modelMapper.map(userDTO, existingUser);
+
+        if (userDTO.getPassword() != null && !userDTO.getPassword().isEmpty()) {
+            existingUser.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        }
 
         User updatedUser = userRepository.save(existingUser);
         return convertToDto(updatedUser);
