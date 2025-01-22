@@ -31,7 +31,7 @@ public class UserServiceImpl implements IUserService{
     @Override
     public UserDTO createUser(UserDTO userDTO) {
         User user = convertToEntity(userDTO);
-        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         User savedUser = userRepository.save(user);
         return convertToDto(savedUser);
     }
