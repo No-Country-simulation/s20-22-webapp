@@ -1,7 +1,14 @@
 import { useForm } from 'react-hook-form';
 import { registerFormSchema, RegisterFormValues } from './validation';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { TextField, Button, Snackbar, Alert } from '@mui/material';
+import {
+  TextField,
+  Button,
+  Snackbar,
+  Alert,
+  Typography,
+  CircularProgress,
+} from '@mui/material';
 import { registerUser } from './authService';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -10,9 +17,11 @@ export default function RegisterForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    reset,
+    formState: { errors, isValid },
   } = useForm<RegisterFormValues>({
     resolver: zodResolver(registerFormSchema),
+    mode: 'onChange',
   });
 
   const navigate = useNavigate();
@@ -31,10 +40,13 @@ export default function RegisterForm() {
     try {
       await registerUser(data);
       setAlertSeverity('success');
-      setAlertMessage('Te has registrado con éxito. Serás redirigido al inicio de sesión.');
+      setAlertMessage(
+        'Te has registrado con éxito. Serás redirigido al inicio de sesión.'
+      );
       setTimeout(() => {
         navigate('/login');
       }, 1000);
+      reset();
     } catch (error) {
       console.error('error--->', error);
       setAlertSeverity('error');
@@ -106,9 +118,14 @@ export default function RegisterForm() {
         color="primary"
         fullWidth
         style={{ marginTop: 16 }}
-        disabled={isLoading}
+        disabled={isLoading || !isValid}
+        startIcon={
+          isLoading ? <CircularProgress size={24} color="inherit" /> : null
+        } // Spinner dentro del botón
       >
-        {isLoading ? 'Registrando...' : 'Registrarse'}
+        <Typography variant="button">
+          {isLoading ? 'Registrando, por favor espere....' : 'Registrarse'}
+        </Typography>
       </Button>
 
       {/* Toast */}
