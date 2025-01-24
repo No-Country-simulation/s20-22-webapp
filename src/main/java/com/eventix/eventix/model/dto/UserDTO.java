@@ -12,6 +12,9 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDTO {
+
+    private Long userId;
+
     @NotBlank(message = "Nombre es obligatorio")
     private String firstName;
 

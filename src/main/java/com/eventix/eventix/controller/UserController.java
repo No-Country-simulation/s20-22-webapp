@@ -2,8 +2,9 @@ package com.eventix.eventix.controller;
 
 import com.eventix.eventix.enums.Role;
 import com.eventix.eventix.model.dto.UserDTO;
-import com.eventix.eventix.service.IUserService;
+import com.eventix.eventix.service.user.IUserService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,19 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/user")
+@RequiredArgsConstructor
 public class UserController {
 
     private final IUserService userService;
-
-    public UserController(IUserService userService) {
-        this.userService = userService;
-    }
-
-    @PostMapping("/create")
-    public ResponseEntity<UserDTO> createUser(@RequestBody @Valid UserDTO userDTO) {
-        UserDTO createUser = userService.createUser(userDTO);
-        return ResponseEntity.ok(createUser);
-    }
 
     @GetMapping("/all")
     public ResponseEntity<List<UserDTO>> getAllUsers() {

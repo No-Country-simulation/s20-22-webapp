@@ -1,10 +1,11 @@
-package com.eventix.eventix.service;
+package com.eventix.eventix.service.user;
 
 import com.eventix.eventix.domain.User;
 import com.eventix.eventix.enums.Role;
 import com.eventix.eventix.model.dto.UserDTO;
 import com.eventix.eventix.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,28 +14,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-
-public class UserServiceImpl implements IUserService{
+@RequiredArgsConstructor
+public class UserServiceImpl implements IUserService {
 
     private final UserRepository userRepository;
-
     private final ModelMapper modelMapper;
-
     private final PasswordEncoder passwordEncoder;
-
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.modelMapper = modelMapper;
-        this.passwordEncoder = passwordEncoder;
-    }
-
-    @Override
-    public UserDTO createUser(UserDTO userDTO) {
-        User user = convertToEntity(userDTO);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        User savedUser = userRepository.save(user);
-        return convertToDto(savedUser);
-    }
 
     @Override
     public List<UserDTO> getAllUsers() {
