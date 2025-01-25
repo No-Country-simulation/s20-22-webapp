@@ -8,10 +8,9 @@ import org.hibernate.annotations.SourceType;
 
 import java.sql.Timestamp;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity(name = "users")
 public class User {
     @Id
