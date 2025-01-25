@@ -1,5 +1,6 @@
 package com.eventix.eventix.controller;
 
+
 import com.eventix.eventix.enums.Role;
 import com.eventix.eventix.model.dto.UserDTO;
 import com.eventix.eventix.service.user.IUserService;
