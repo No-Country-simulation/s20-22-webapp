@@ -12,17 +12,22 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDTO {
-    /*@NotBlank(message = "First name is required")*/
+
+    private Long userId;
+
+    @NotBlank(message = "Nombre es obligatorio")
     private String firstName;
 
-    /*@NotBlank(message = "Last name is required")*/
+    @NotBlank(message = "Apellido es obligatorio")
     private String lastName;
 
-    /*@Email(message = "Invalid email format")*/
+    @NotBlank(message = "Email es obligatorio")
+    @Email(message = "Formato email inválido")
     private String email;
 
-    /*@NotBlank(message = "Password is required")
-    @Size(min = 8, message = "Password must be at least 8 characters long")*/
+    @NotBlank(message = "Password es obligatorio")
+    @Size(min = 8, message = "Password tiene que tener más de 8 caracteres")
+
     private String password;
 
     private Role role;
