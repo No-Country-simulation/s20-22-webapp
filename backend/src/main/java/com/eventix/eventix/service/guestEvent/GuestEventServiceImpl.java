@@ -1,11 +1,10 @@
-package com.eventix.eventix.service;
+package com.eventix.eventix.service.guestEvent;
 
 import com.eventix.eventix.domain.Event;
 import com.eventix.eventix.domain.GuestEvent;
 import com.eventix.eventix.domain.User;
 import com.eventix.eventix.model.dto.GuestEventDto;
 import com.eventix.eventix.repository.IGuestEventRepository;
-import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

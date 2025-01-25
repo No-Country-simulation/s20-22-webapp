@@ -1,8 +1,7 @@
 package com.eventix.eventix.controller;
 
-import com.eventix.eventix.domain.GuestEvent;
 import com.eventix.eventix.model.dto.GuestEventDto;
-import com.eventix.eventix.service.IGuestEventService;
+import com.eventix.eventix.service.guestEvent.IGuestEventService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

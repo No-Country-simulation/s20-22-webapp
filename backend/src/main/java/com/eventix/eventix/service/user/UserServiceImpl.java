@@ -3,7 +3,7 @@ package com.eventix.eventix.service.user;
 import com.eventix.eventix.domain.User;
 import com.eventix.eventix.enums.Role;
 import com.eventix.eventix.model.dto.UserDTO;
-import com.eventix.eventix.repository.UserRepository;
+import com.eventix.eventix.repository.IUserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -17,13 +17,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserServiceImpl implements IUserService {
 
-    private final UserRepository userRepository;
+    private final IUserRepository IUserRepository;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
 
     @Override
     public List<UserDTO> getAllUsers() {
-        return userRepository.findAll()
+        return IUserRepository.findAll()
                 .stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
@@ -31,14 +31,14 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public UserDTO getUserById(Long userId) {
-        User user = userRepository.findById(userId)
+        User user = IUserRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con ID: " + userId));
         return convertToDto(user);
     }
 
     @Override
     public List<UserDTO> getUserByRole(Role role) {
-        return userRepository.findByRole(role)
+        return IUserRepository.findByRole(role)
                 .stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
@@ -46,7 +46,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public List<UserDTO> getUserByNameAndLastName(String firstName, String lastName) {
-        return userRepository.findByFirstNameAndLastName(firstName, lastName)
+        return IUserRepository.findByFirstNameAndLastName(firstName, lastName)
                 .stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
@@ -54,7 +54,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public UserDTO updateUser(Long userId, UserDTO userDTO) {
-        User existingUser = userRepository.findById(userId)
+        User existingUser = IUserRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con ID: " + userId));
 
         modelMapper.map(userDTO, existingUser);
@@ -63,15 +63,15 @@ public class UserServiceImpl implements IUserService {
             existingUser.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         }
 
-        User updatedUser = userRepository.save(existingUser);
+        User updatedUser = IUserRepository.save(existingUser);
         return convertToDto(updatedUser);
     }
 
     @Override
     public void deleteUser(Long userId) {
-        User user = userRepository.findById(userId)
+        User user = IUserRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con ID: " + userId));
-        userRepository.delete(user);
+        IUserRepository.delete(user);
     }
 
     // Entity to DTO

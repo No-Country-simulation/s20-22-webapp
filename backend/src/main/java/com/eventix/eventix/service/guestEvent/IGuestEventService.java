@@ -1,4 +1,4 @@
-package com.eventix.eventix.service;
+package com.eventix.eventix.service.guestEvent;
 
 import com.eventix.eventix.domain.GuestEvent;
 import com.eventix.eventix.model.dto.GuestEventDto;

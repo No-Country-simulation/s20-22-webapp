@@ -1,4 +1,4 @@
-package com.eventix.eventix.model;
+package com.eventix.eventix.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

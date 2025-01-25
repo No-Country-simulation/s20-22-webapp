@@ -4,7 +4,7 @@ import com.eventix.eventix.domain.User;
 import com.eventix.eventix.model.dto.LoginDTO;
 import com.eventix.eventix.model.dto.ResponseDTO;
 import com.eventix.eventix.model.validation.UserValidation;
-import com.eventix.eventix.repository.UserRepository;
+import com.eventix.eventix.repository.IUserRepository;
 import com.eventix.eventix.service.jwt.IJwtUtilityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,7 +16,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AuthServiceImpl implements IAuthService {
 
-    private final UserRepository userRepository;
+    private final IUserRepository IUserRepository;
     private final IJwtUtilityService jwtUtilityService;
     private final UserValidation userValidation;
     private final TokenBlacklistService tokenBlacklistService;
@@ -30,7 +30,7 @@ public class AuthServiceImpl implements IAuthService {
         }
 
         try {
-            Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
+            Optional<User> existingUser = IUserRepository.findByEmail(user.getEmail());
             if (existingUser.isPresent()) {
                 response.setMessage("Usuario ya existe con el correo " + user.getEmail());
                 response.setSuccess(false);
@@ -39,7 +39,7 @@ public class AuthServiceImpl implements IAuthService {
 
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
             user.setPassword(encoder.encode(user.getPassword()));
-            userRepository.save(user);
+            IUserRepository.save(user);
 
             response.setMessage("Usuario registrado con éxito.");
             response.setSuccess(true);
@@ -55,7 +55,7 @@ public class AuthServiceImpl implements IAuthService {
     public ResponseDTO login(LoginDTO login) {
         ResponseDTO response = new ResponseDTO();
         try {
-            Optional<User> user = userRepository.findByEmail(login.getEmail());
+            Optional<User> user = IUserRepository.findByEmail(login.getEmail());
             if (user.isEmpty()) {
                 response.setMessage("Usuario no registrado.");
                 return response;

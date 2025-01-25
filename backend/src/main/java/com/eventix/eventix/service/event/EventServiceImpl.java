@@ -1,4 +1,4 @@
-package com.eventix.eventix.service;
+package com.eventix.eventix.service.event;
 
 import com.eventix.eventix.domain.Event;
 import com.eventix.eventix.repository.IEventRepository;
