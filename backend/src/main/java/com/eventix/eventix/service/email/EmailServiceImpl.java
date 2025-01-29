@@ -1,6 +1,7 @@
 package com.eventix.eventix.service.email;
 
-import com.eventix.eventix.model.dto.EmailDTO;
+import com.eventix.eventix.model.dto.EventReqDto;
+import com.eventix.eventix.model.dto.UserDTO;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
@@ -18,16 +19,16 @@ public class EmailServiceImpl implements IEmailService {
     private final TemplateEngine templateEngine;
 
     @Override
-    public void sendEmail(EmailDTO email) throws MessagingException {
+    public void sendEmail(EventReqDto event, UserDTO user) throws MessagingException {
         try {
             MimeMessage message = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
-            helper.setTo(email.getTo());
-            helper.setSubject(email.getSubject());
+            helper.setTo(user.getEmail());
+            helper.setSubject(event.getDescription());
 
             Context context = new Context();
-            context.setVariable("message", email.getMessage());
+            context.setVariable("message", event.getInvitationMessage());
             String contentHtml = templateEngine.process("email", context);
 
             helper.setText(contentHtml, true);

@@ -1,6 +1,7 @@
 package com.eventix.eventix.controller;
 
-import com.eventix.eventix.model.dto.EmailDTO;
+import com.eventix.eventix.model.dto.EventReqDto;
+import com.eventix.eventix.model.dto.UserDTO;
 import com.eventix.eventix.service.email.IEmailService;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +20,8 @@ public class EmailController {
     private final IEmailService emailService;
 
     @PostMapping()
-    private ResponseEntity<String> sendEmail(@RequestBody EmailDTO email) throws MessagingException {
-        emailService.sendEmail(email);
+    private ResponseEntity<String> sendEmail(@RequestBody EventReqDto event, UserDTO user) throws MessagingException {
+        emailService.sendEmail(event, user);
         return new ResponseEntity<>("Correo enviado exitosamente", HttpStatus.OK);
     }
 }
