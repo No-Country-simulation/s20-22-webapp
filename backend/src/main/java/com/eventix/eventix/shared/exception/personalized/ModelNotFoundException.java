@@ -9,7 +9,7 @@ public class ModelNotFoundException extends RuntimeException{
         super(message);
     }
 
-    public ModelNotFoundException(Integer idNotFound, String nameModel) {
+    public ModelNotFoundException(Long idNotFound, String nameModel) {
         super(String.format("The object was not found - id not found: %d - Name Model: %s",
                 idNotFound, nameModel));
     }
