@@ -5,6 +5,7 @@ import com.eventix.eventix.enums.EventStatus;
 import com.eventix.eventix.model.dto.EventReqDto;
 import com.eventix.eventix.model.dto.EventResDto;
 import com.eventix.eventix.repository.IEventRepository;
+import com.eventix.eventix.shared.exception.personalized.ModelNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,9 @@ public class EventServiceImpl implements IEventService {
 
     @Override
     public Event findById(long id) {
-        Event event = eventRepository.findById(id).orElseThrow(); //TODO: Crear excepciones personalizadas
+        Event event = eventRepository.findById(id).orElseThrow(
+                () -> new ModelNotFoundException(id, Event.class.getSimpleName())
+        );
         return event;
     }
 
@@ -56,7 +59,7 @@ public class EventServiceImpl implements IEventService {
         if (eventExists){
             eventRepository.deleteById(id);
         } else {
-            throw new NullPointerException(); // TODO: Cambiar por excepcion personalizada
+            throw new ModelNotFoundException(id, Event.class.getSimpleName());
         }
     }
 

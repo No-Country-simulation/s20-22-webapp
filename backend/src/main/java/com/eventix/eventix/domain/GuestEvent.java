@@ -11,7 +11,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-//@AllArgsConstructor
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "guest-event")
@@ -22,9 +22,4 @@ public class GuestEvent {
 
     @Id
     private Event event;
-
-    public GuestEvent(User user, Event event) {
-        this.user = user;
-        this.event = event;
-    }
 }

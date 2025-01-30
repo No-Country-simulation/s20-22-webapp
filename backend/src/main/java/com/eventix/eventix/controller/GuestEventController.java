@@ -1,11 +1,11 @@
 package com.eventix.eventix.controller;
 
+import com.eventix.eventix.domain.GuestEvent;
 import com.eventix.eventix.model.dto.GuestEventDto;
 import com.eventix.eventix.service.guestEvent.IGuestEventService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/guest-event")
@@ -16,8 +16,22 @@ public class GuestEventController {
         this.guestEventService = guestEventService;
     }
 
-    @GetMapping
-    public ResponseEntity<GuestEventDto> inviteGuest(Long userId, Long eventId){
-        return ResponseEntity.ok(this.guestEventService.inviteGuest(userId, eventId));
+    @PostMapping("/invite/{user-id}/{event-id}")
+    public ResponseEntity<GuestEventDto> inviteGuest(
+            @PathVariable(value = "user-id") Long userId,
+            @PathVariable(value = "event-id") Long eventId
+    ){
+        GuestEvent response = this.guestEventService.inviteGuest(userId, eventId);
+        return ResponseEntity.ok(guestEventService.convertToDto(response));
     }
+
+    @DeleteMapping("/uninvite/{user-id}/{event-id}")
+    public ResponseEntity<Void> uninviteGuest(
+            @PathVariable(value = "user-id") Long userId,
+            @PathVariable(value = "event-id") Long eventId
+    ){
+        guestEventService.uninviteGuest(userId, eventId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
 }
