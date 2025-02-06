@@ -17,7 +17,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class EventReqDto {
 //    private UserDTO organizer;
-
     @Min(1)
     private Long organizerId;
 
