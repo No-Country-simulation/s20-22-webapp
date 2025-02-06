@@ -1,21 +1,16 @@
 package com.eventix.eventix.model.dto;
 
-import com.eventix.eventix.domain.Event;
-import com.eventix.eventix.domain.User;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-//@AllArgsConstructor
+@AllArgsConstructor
 @NoArgsConstructor
 public class GuestEventDto {
-    private User user;
-    private Event event;
+    private UserDTO user;
+    private EventResDto event;
 
-    public GuestEventDto(Event event, User user) {
-        this.event = event;
-        this.user = user;
-    }
 }
